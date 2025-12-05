@@ -20,3 +20,4 @@ OrbitBot is a Discord bot dedicated to providing fascinating space-related data 
 3. Create a `.env` file with your `DISCORD_TOKEN` and `CLIENT_ID`.
 4. Run the bot: `node index.js`
 # OrbitBot
+# OrbitBot
