@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+
+<section class="content-section">
+    <h2>SYSTEM INFORMATION</h2>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p class="stat-title">Bot Status</p>
+            <p class="stat-value status-<%= botStatus.toLowerCase() %>"><%= botStatus %></p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">Servers</p>
+            <p class="stat-value"><%= serverCount.toLocaleString() %></p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">Users Served</p>
+            <p class="stat-value"><%= userCount.toLocaleString() %></p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">Commands Executed</p>
+            <p class="stat-value"><%= commandCount.toLocaleString() %></p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">CPU Load (1m)</p>
+            <p class="stat-value"><%= cpuLoad %>%</p>
+        </div>
+        <div class="stat-card">
+            <p class="stat-title">Memory Usage</p>
+            <p class="stat-value"><%= memUsage %>%</p>
+        </div>
+        <div class="stat-card large-card">
+            <p class="stat-title">CPU Model</p>
+            <p class="stat-value" style="font-size: 1.5rem;"><%= cpuModel %></p>
+        </div>
+        <div class="stat-card large-card">
+            <p class="stat-title">Current Uptime</p>
+            <p class="stat-value"><%= uptime %></p>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

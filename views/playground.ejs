@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<section class="content-section">
+    <h2>API PLAYGROUND</h2>
+    
+    <div class="api-card" id="iss-card">
+        <h3>
+            International Space Station Location 
+            <span class="help-icon" data-tooltip="Provides the real-time geographic coordinates (latitude and longitude) of the ISS.">?</span>
+        </h3>
+        <p>Fetch the current real-time coordinates of the ISS.</p>
+        <button data-api="iss-location">FETCH DATA</button>
+        <pre class="result-box"></pre>
+    </div>
+
+    <div class="api-card" id="satellite-card">
+        <h3>
+            Satellite View
+            <span class="help-icon" data-tooltip="Shows the latest full-disk images of Earth from geostationary weather satellites GOES (Americas/Pacific) and Himawari (Asia/Australia).">?</span>
+        </h3>
+        <p>Select a full-disk view of Earth from a live satellite feed.</p>
+        <p class="card-warning">Warning: Images are high-resolution and may use significant data.</p>
+        <select class="view-select" data-api="satellite-view"></select>
+        <button data-api="satellite-view">FETCH DATA</button>
+        <div class="result-box"></div>
+    </div>
+
+    <div class="api-card" id="sun-card">
+        <h3>
+            Sun View
+            <span class="help-icon" data-tooltip="Shows the latest images of the Sun from NASA's SDO and NOAA's SUVI instruments, captured in various wavelengths of light to reveal different solar phenomena.">?</span>
+        </h3>
+        <p>See the latest images of the sun in different wavelengths.</p>
+        <p class="card-warning">Warning: Images are high-resolution and may use significant data.</p>
+        <select class="view-select" data-api="sun-now"></select>
+        <button data-api="sun-now">FETCH DATA</button>
+        <div class="result-box"></div>
+    </div>
+
+    <div class="disclaimer-box">
+        <strong>Warning:</strong> Data is provided by third-party APIs (NOAA, NASA, Open-Notify, etc.) and is for informational purposes only. Availability is not guaranteed. Do not use for navigation or other critical applications.
+    </div>
+
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrbitBot - Explore the Universe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --primary: #5865F2;
+            --accent: #00d2ff;
+            --bg: #09090b;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #fff;
+            margin: 0;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(88, 101, 242, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 210, 255, 0.15) 0%, transparent 25%);
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: calc(100% - 100px);
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: #fff; }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-login {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover { background: rgba(255,255,255,0.1); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin-bottom: 40px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero-btn {
+            padding: 18px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px -10px rgba(88, 101, 242, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: bounceIn 1.2s ease-out;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px -10px rgba(88, 101, 242, 0.6);
+        }
+
+        /* Features Cards */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: -100px auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            background: rgba(0, 210, 255, 0.1);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            transition: 0.4s;
+        }
+
+        .card:hover .card-icon {
+            background: var(--accent);
+            color: #000;
+            transform: rotate(10deg);
+        }
+
+        .card h3 { margin: 0 0 10px 0; font-size: 1.5rem; }
+        .card p { color: #888; line-height: 1.6; margin: 0; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounceIn { 
+            0% { opacity: 0; transform: scale(0.3); } 
+            50% { opacity: 1; transform: scale(1.05); } 
+            70% { transform: scale(0.9); } 
+            100% { transform: scale(1); } 
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            nav { padding: 20px; width: calc(100% - 40px); }
+            .nav-links { display: none; }
+            .features { margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><i class="fa-solid fa-user-astronaut"></i> OrbitBot</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#features">Features</a>
+            <a href="#">Commands</a>
+            <a href="https://github.com/orbitbot">GitHub</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Explore the Cosmos<br>From Discord.</h1>
+        <p>Track the ISS in real-time, discover detailed planet information, and get daily astronomy updates. Your personal space assistant is here.</p>
+        <a href="https://discord.com/api/oauth2/authorize?client_id=<%= clientId %>&permissions=8&scope=bot%20applications.commands" class="hero-btn">
+            <i class="fa-brands fa-discord"></i> Add to Discord
+        </a>
+    </section>
+
+    <section class="features" id="features">
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-satellite"></i></div>
+            <h3>ISS Tracking</h3>
+            <p>Get real-time coordinates and mapping of the International Space Station instantly.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3>Planet Encyclopedia</h3>
+            <p>Access detailed data about every planet in our solar system, sourced from NASA APIs.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-star"></i></div>
+            <h3>Astronomy Picture</h3>
+            <p>Start your day with the Astronomy Picture of the Day (APOD) directly in your server.</p>
+                </div>
+            </section>
+        
+            <footer style="text-align: center; padding: 40px 20px; color: #666; border-top: 1px solid var(--glass-border); margin-top: 50px;">
+                <p>&copy; 2025 OrbitBot. All rights reserved.</p>
+                <div style="margin-top: 10px;">
+                    <a href="/tos" style="color: #888; text-decoration: none; margin: 0 10px; transition: color 0.2s;">Terms of Service</a>
+                    <a href="/privacy" style="color: #888; text-decoration: none; margin: 0 10px; transition: color 0.2s;">Privacy Policy</a>
+                </div>
+            </footer>
+        
+        </body>
+        </html>
+        
